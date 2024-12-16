@@ -1,0 +1,63 @@
+class Celular:
+    def __init__(self, modelo, precio, stock):
+        self.modelo = modelo  # Atributo público
+        self.__precio = precio  # Atributo privado
+        self.__stock = stock  # Atributo privado
+
+    # Método para obtener el precio del celular
+    def obtener_precio(self):
+        return f"El precio del {self.modelo} es ${self.__precio:.2f}"
+
+    # Método para establecer un nuevo precio con validación
+    def establecer_precio(self, nuevo_precio):
+        if nuevo_precio > 0:
+            self.__precio = nuevo_precio
+            return f"El nuevo precio del {self.modelo} es ${self.__precio:.2f}"
+        else:
+            return "El precio debe ser un valor positivo."
+
+    # Método para verificar el stock
+    def verificar_stock(self):
+        return f"Stock disponible para {self.modelo}: {self.__stock} unidades."
+
+    # Método para vender un celular
+    def vender(self, cantidad):
+        if cantidad <= 0:
+            return "La cantidad a vender debe ser mayor a 0."
+        elif cantidad > self.__stock:
+            return f"No hay suficiente stock para {self.modelo}. Stock disponible: {self.__stock}."
+        else:
+            self.__stock -= cantidad
+            return f"Venta exitosa de {cantidad} {self.modelo}(s). Stock restante: {self.__stock}."
+
+    # Método para agregar más stock
+    def agregar_stock(self, cantidad):
+        if cantidad > 0:
+            self.__stock += cantidad
+            return f"Stock actualizado. Nuevo stock de {self.modelo}: {self.__stock} unidades."
+        else:
+            return "La cantidad a agregar debe ser mayor a 0."
+
+# Uso de la clase
+celular = Celular("iPhone 15", 1200.0, 50)
+
+# Consultar precio
+print(celular.obtener_precio())  # El precio del iPhone 15 es $1200.00
+
+# Intentar cambiar el precio a un valor inválido
+print(celular.establecer_precio(-500))  # El precio debe ser un valor positivo.
+
+# Cambiar el precio a un valor válido
+print(celular.establecer_precio(1300.0))  # El nuevo precio del iPhone 15 es $1300.00
+
+# Consultar stock
+print(celular.verificar_stock())  # Stock disponible para iPhone 15: 50 unidades.
+
+# Intentar vender más unidades de las disponibles
+print(celular.vender(60))  # No hay suficiente stock para iPhone 15. Stock disponible: 50.
+
+# Vender unidades
+print(celular.vender(10))  # Venta exitosa de 10 iPhone 15(s). Stock restante: 40.
+
+# Agregar stock
+print(celular.agregar_stock(20))  # Stock actualizado. Nuevo stock de iPhone 15: 60 unidades.
