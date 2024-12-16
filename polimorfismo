@@ -1,0 +1,63 @@
+# Clase base: Estudiante
+class Estudiante:
+    def __init__(self, nombre, grado, promedio):
+        self.nombre = nombre
+        self.grado = grado
+        self.promedio = promedio
+
+    # Método genérico que será sobrescrito en las subclases
+    def detalle(self):
+        return (f"Estudiante: {self.nombre}, Grado: {self.grado}, "
+                f"Promedio: {self.promedio:.2f}")
+
+# Subclase: Estudiante de Telecomunicaciones
+class EstudianteTelecomunicaciones(Estudiante):
+    def __init__(self, nombre, grado, promedio, proyecto):
+        super().__init__(nombre, grado, promedio)
+        self.proyecto = proyecto
+
+    # Sobrescribir el método detalle
+    def detalle(self):
+        return (f"Estudiante: {self.nombre}, Grado: {self.grado}, "
+                f"Especialidad: Telecomunicaciones, Proyecto: {self.proyecto}, "
+                f"Promedio: {self.promedio:.2f}")
+
+# Subclase: Estudiante de Automatización
+class EstudianteAutomatizacion(Estudiante):
+    def __init__(self, nombre, grado, promedio, sistema_diseñado):
+        super().__init__(nombre, grado, promedio)
+        self.sistema_diseñado = sistema_diseñado
+
+    # Sobrescribir el método detalle
+    def detalle(self):
+        return (f"Estudiante: {self.nombre}, Grado: {self.grado}, "
+                f"Especialidad: Automatización, Sistema Diseñado: {self.sistema_diseñado}, "
+                f"Promedio: {self.promedio:.2f}")
+
+# Subclase: Estudiante de Circuitos
+class EstudianteCircuitos(Estudiante):
+    def __init__(self, nombre, grado, promedio, componente_fabricado):
+        super().__init__(nombre, grado, promedio)
+        self.componente_fabricado = componente_fabricado
+
+    # Sobrescribir el método detalle
+    def detalle(self):
+        return (f"Estudiante: {self.nombre}, Grado: {self.grado}, "
+                f"Especialidad: Circuitos, Componente Fabricado: {self.componente_fabricado}, "
+                f"Promedio: {self.promedio:.2f}")
+
+# Función que utiliza polimorfismo
+def mostrar_detalle_estudiante(estudiante):
+    print(estudiante.detalle())
+
+# Crear instancias de diferentes tipos de estudiantes
+telecom = EstudianteTelecomunicaciones("Juan Pérez", "4to", 8.5, "Antena de alto alcance")
+automatizacion = EstudianteAutomatizacion("Ana López", "5to", 9.2, "Sistema de riego automatizado")
+circuitos = EstudianteCircuitos("Luis García", "3ro", 8.0, "Amplificador de audio")
+
+# Lista de estudiantes
+estudiantes = [telecom, automatizacion, circuitos]
+
+# Mostrar detalles de cada estudiante utilizando polimorfismo
+for estudiante in estudiantes:
+    mostrar_detalle_estudiante(estudiante)
