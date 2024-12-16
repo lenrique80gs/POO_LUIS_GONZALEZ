@@ -1,0 +1,41 @@
+class CuentaBancaria:
+    def __init__(self, titular, saldo_inicial):
+        self.titular = titular  # Atributo público
+        self.__saldo = saldo_inicial  # Atributo privado: no accesible directamente desde fuera
+
+    # Método público para consultar el saldo
+    def consultar_saldo(self):
+        return f"El saldo actual de {self.titular} es: ${self.__saldo:.2f}"
+
+    # Método público para depositar dinero
+    def depositar(self, cantidad):
+        if cantidad > 0:
+            self.__saldo += cantidad
+            return f"Depósito exitoso. Nuevo saldo: ${self.__saldo:.2f}"
+        else:
+            return "La cantidad a depositar debe ser positiva."
+
+    # Método público para retirar dinero
+    def retirar(self, cantidad):
+        if cantidad > self.__saldo:
+            return "Fondos insuficientes."
+        elif cantidad > 0:
+            self.__saldo -= cantidad
+            return f"Retiro exitoso. Nuevo saldo: ${self.__saldo:.2f}"
+        else:
+            return "La cantidad a retirar debe ser positiva."
+
+# Uso de la clase
+cuenta = CuentaBancaria("Juan Pérez", 500.0)
+
+# Consultar saldo
+print(cuenta.consultar_saldo())  # El saldo actual de Juan Pérez es: $500.00
+
+# Realizar un depósito
+print(cuenta.depositar(150.0))  # Depósito exitoso. Nuevo saldo: $650.00
+
+# Intentar retirar más del saldo disponible
+print(cuenta.retirar(700.0))  # Fondos insuficientes.
+
+# Retirar una cantidad válida
+print(cuenta.retirar(200.0))  # Retiro exitoso. Nuevo saldo: $450.00
