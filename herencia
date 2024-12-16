@@ -1,0 +1,55 @@
+# Clase base: Repuesto
+class Repuesto:
+    def __init__(self, nombre, precio, stock):
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def consultar_precio(self):
+        return f"El precio del repuesto '{self.nombre}' es ${self.precio:.2f}"
+
+    def verificar_stock(self):
+        return f"Stock disponible de '{self.nombre}': {self.stock} unidades"
+
+    def vender(self, cantidad):
+        if cantidad <= 0:
+            return "La cantidad debe ser mayor a 0."
+        elif cantidad > self.stock:
+            return f"No hay suficiente stock de '{self.nombre}'. Stock disponible: {self.stock}."
+        else:
+            self.stock -= cantidad
+            return f"Venta exitosa de {cantidad} unidades de '{self.nombre}'. Stock restante: {self.stock}."
+
+    def agregar_stock(self, cantidad):
+        if cantidad > 0:
+            self.stock += cantidad
+            return f"Stock actualizado. Nuevo stock de '{self.nombre}': {self.stock} unidades."
+        else:
+            return "La cantidad a agregar debe ser mayor a 0."
+
+# Clase derivada: Filtro (hereda de Repuesto)
+class Filtro(Repuesto):
+    def __init__(self, nombre, precio, stock, tipo):
+        super().__init__(nombre, precio, stock)
+        self.tipo = tipo  # Tipo de filtro (por ejemplo, aire, aceite, combustible)
+
+    def consultar_tipo(self):
+        return f"El filtro '{self.nombre}' es de tipo '{self.tipo}'."
+
+# Clase derivada: Neumático (hereda de Repuesto)
+class Neumatico(Repuesto):
+    def __init__(self, nombre, precio, stock, tamaño):
+        super().__init__(nombre, precio, stock)
+        self.tamaño = tamaño  # Tamaño del neumático (por ejemplo, 195/65 R15)
+
+    def consultar_tamaño(self):
+        return f"El neumático '{self.nombre}' tiene tamaño '{self.tamaño}'."
+
+# Clase derivada: Batería (hereda de Repuesto)
+class Bateria(Repuesto):
+    def __init__(self, nombre, precio, stock, capacidad):
+        super().__init__(nombre, precio, stock)
+        self.capacidad = capacidad  # Capacidad de la batería en Ah (amperios-hora)
+
+    def consultar_capacidad(self):
+        return f"La batería '{self.nombre}' tiene una capacidad de {self.capacidad} Ah."
